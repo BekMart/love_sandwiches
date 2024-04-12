@@ -1,6 +1,5 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,12 +21,12 @@ def get_sales_data():
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n")
 
-        data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here:\n")
         
         sales_data = data_str.split(",")
         
         if validate_data(sales_data):
-            print("Data is valid")
+            print("Data is valid.\n")
             break
 
     return sales_data
@@ -72,7 +71,7 @@ def update_worksheet(data, worksheet):
     Recieves a list f integers to be inserted into a worksheet.
     Update the relevent worksheet with the data provided.
     """
-    print(f"Updating {worksheet} worksheet")
+    print(f"Updating {worksheet} worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
     print(f"{worksheet} worksheet updated successfully.\n")
@@ -85,7 +84,7 @@ def calculate_surplus_data(sales_row):
     - Positive surplus indicates waste
     - Negative surplus indictaes extra made when stock sold out
     """
-    print("Calculating surplus data...")
+    print("Calculating surplus data...\n")
     stock = SHEET.worksheet("stock").get_all_values()
     stock_row = stock[-1]
     
